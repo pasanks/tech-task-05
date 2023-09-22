@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MemberStoreRequest;
 use App\Models\Member;
 use App\Models\School;
-use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -23,22 +23,14 @@ class MemberController extends Controller
     /**
      * Store new member.
      *
+     * @param MemberStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(MemberStoreRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:members',
-            'school_id' => 'required|array|exists:schools,id',
-        ]);
+        $member = Member::create($request->all());
 
-        $member = Member::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ]);
-
-        $member->schools()->attach($data['school_id']);
+        $member->schools()->attach($request->get('school_id'));
 
         return redirect()->route('index')->with('success', 'Member added successfully');
     }
