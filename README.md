@@ -50,3 +50,12 @@ You can run the test suit by running
 php artisan test
 ```
 
+When implementing this demo app,
+
+Based on the requirements "Each member can be associated with 1 or more schools, and the demo should display all members for a selected school," this is indicative of a many-to-many relationship.
+- Each member can be associated with multiple schools.
+- Each school can be associated with multiple members.
+
+- I created feature tests for the two main controllers and didn't spend much time on unit tests.
+- Created a GitHub action workflow to run CodeSniffer to identify any code styling issues.
+- In terms of the user interface (UI), I opted for a basic Bootstrap/Jquery design. It is responsive up to some extent but has issues with bar chart in the mobile view. Given the time constraints, I focused more on the backend logic and functionality to ensure that the core requirements were effectively met.
