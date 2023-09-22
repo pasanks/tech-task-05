@@ -28,4 +28,4 @@ jobs:
         run: composer install -n
 
       - name: Run CodeSniffer
-        run: php vendor/bin/phpcs --no-cache --parallel=1 --report-full
+        run: php ./vendor/bin/phpcs --no-cache --parallel=1 --report-full
