@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="row">
         <div class="col-md-6">
-
             <div class="form-group">
                 <label for="exampleInputEmail1">School</label>
                 <select class="form-control" id="schoolSelect" name="school_id">
@@ -27,17 +24,11 @@
                 </select>
             </div>
         </div>
-
-
     </div>
+
     <button id="searchButton" class="btn btn-primary float-end mt-3">Search</button>
 
-
-
-    <div id="searchResults" class="row mt-5" >
-
-    </div>
-
+    <div id="searchResults" class="row mt-5" ></div>
 
     <div style="width: 100%; margin: auto;" class="mt-5">
         <h5>Schools and No. of Members - Bar Chart</h5>
@@ -47,7 +38,6 @@
 
     <script>
         $(document).ready(function() {
-
             $.ajax({
                 url: '/chart/',
                 type: 'GET',
@@ -76,7 +66,6 @@
                                 y: {
                                     beginAtZero: true,
                                     ticks: {
-                                        // forces step size to be 50 units
                                         stepSize: 1
                                     }
                                 }
@@ -111,23 +100,19 @@
                 $('#searchResults').html(resultsHtml);
             }
 
-
-
             $('#searchButton').click(function() {
-                console.log('clicked');
                 var selectedSchool = $("#schoolSelect").val();
                 var selectedCountry = $("#countrySelect").val();
 
-
-                // Send an AJAX request to fetch schools and members for the selected country
                 $.ajax({
                     url: '/search',
                     type: 'GET',
-                    data: { school: selectedSchool, country: selectedCountry },
+                    data: {
+                        school: selectedSchool,
+                        country: selectedCountry
+                    },
                     dataType: 'json', // Expect JSON response
                     success: function(response) {
-                        // Call the displayResults function to render the data
-                        console.log(response.schools);
                         displayResults(response.schools);
                     },
                     error: function(error) {
