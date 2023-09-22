@@ -76,7 +76,7 @@ class IndexController extends Controller
     {
         $members = Member::with('schools')->get();
 
-        $filename = date('YmdHs').'_members.csv';
+        $filename = date('YmdHs') . '_members.csv';
 
         //CSV header
         $headers = [
